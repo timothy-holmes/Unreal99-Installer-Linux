@@ -285,36 +285,36 @@ class Program
 
         //https://github.com/alexstrout/foxWSFix-UT99/releases/download/v1.1.1/foxWSFix99-v1.1.1.7z
         // Widescreen Patch
-        if (widescreenmod)
-        {
-            Console.WriteLine("Downloading Widescreen Patch...");
-            Console.Title = "Unreal99 Linux Installer - Downloading Widescreen Patch";
-            var widescreenPatchUrl =
-                "https://github.com/alexstrout/foxWSFix-UT99/releases/download/v1.1.1/foxWSFix99-v1.1.1.7z";
-            var widescreenPatchDestination = Path.Combine(objDestination, "foxWSFix99-v1.1.1.7z");
-            using (var client = new WebClient())
-            {
-                client.DownloadFile(widescreenPatchUrl, widescreenPatchDestination);
-            }
+        // if (widescreenmod)
+        // {
+        //     Console.WriteLine("Downloading Widescreen Patch...");
+        //     Console.Title = "Unreal99 Linux Installer - Downloading Widescreen Patch";
+        //     var widescreenPatchUrl =
+        //         "https://github.com/alexstrout/foxWSFix-UT99/releases/download/v1.1.1/foxWSFix99-v1.1.1.7z";
+        //     var widescreenPatchDestination = Path.Combine(objDestination, "foxWSFix99-v1.1.1.7z");
+        //     using (var client = new WebClient())
+        //     {
+        //         client.DownloadFile(widescreenPatchUrl, widescreenPatchDestination);
+        //     }
 
-            Console.WriteLine("Widescreen Patch Downloaded!");
-            Console.WriteLine("Extracting Widescreen Patch...");
-            Console.Title = "Unreal99 Linux Installer - Extracting Widescreen Patch";
-            //Extract the Widescreen Patch to objDestination
-            //7z x widescreenPatchDestination
-            ProcessStartInfo startInfo3 = new ProcessStartInfo();
-            startInfo3.FileName = "7z";
-            startInfo3.Arguments = $"x \"{widescreenPatchDestination}\"";
-            startInfo3.WorkingDirectory = objDestination;
-            Process process3 = new Process();
-            process3.StartInfo = startInfo3;
-            process3.Start();
-            process3.WaitForExit();
-            // remove Src and foxWSFix99-v1.1.1.7z and foxWSFix Readme.txt
-            Directory.Delete(Path.Combine(objDestination, "Src"), true);
-            File.Delete(widescreenPatchDestination);
-            File.Delete(Path.Combine(objDestination, "foxWSFix Readme.txt"));
-        }
+        //     Console.WriteLine("Widescreen Patch Downloaded!");
+        //     Console.WriteLine("Extracting Widescreen Patch...");
+        //     Console.Title = "Unreal99 Linux Installer - Extracting Widescreen Patch";
+        //     //Extract the Widescreen Patch to objDestination
+        //     //7z x widescreenPatchDestination
+        //     ProcessStartInfo startInfo3 = new ProcessStartInfo();
+        //     startInfo3.FileName = "7z";
+        //     startInfo3.Arguments = $"x \"{widescreenPatchDestination}\"";
+        //     startInfo3.WorkingDirectory = objDestination;
+        //     Process process3 = new Process();
+        //     process3.StartInfo = startInfo3;
+        //     process3.Start();
+        //     process3.WaitForExit();
+        //     // remove Src and foxWSFix99-v1.1.1.7z and foxWSFix Readme.txt
+        //     Directory.Delete(Path.Combine(objDestination, "Src"), true);
+        //     File.Delete(widescreenPatchDestination);
+        //     File.Delete(Path.Combine(objDestination, "foxWSFix Readme.txt"));
+        // }
 
         // Write the changes to the file
         File.WriteAllLines(defUserFile, DefUserIni);
