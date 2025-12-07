@@ -90,28 +90,31 @@ class Program
                 File.Copy(file, Path.Combine(musicDestination, fileName), true);
             }
             Console.WriteLine("Music Directory Copied!");
-            Console.WriteLine("Copying Sounds Directory...");
         }
+        Console.WriteLine("Copying Sounds Directory...");
         Console.Title = "Unreal99 Linux Installer - Copying Sounds Directory";
         //Ensure destination directories exist
         var soundsSource = Path.Combine(objCdPath, "Sounds");
         var soundsDestination = Path.Combine(objDestination, "Sounds");
         
-        //Ensure destination directories exist
-        if (!Directory.Exists(soundsDestination))
+        if (Directory.Exists(soundsDestination))
         {
-            Directory.CreateDirectory(soundsDestination);
+            //Ensure destination directories exist
+            if (!Directory.Exists(soundsDestination))
+            {
+                Directory.CreateDirectory(soundsDestination);
+            }
+            
+            foreach (var file in Directory.GetFiles(soundsSource))
+            {
+                // Get Filename
+                var fileName = Path.GetFileName(file);
+                Console.WriteLine("Copying " + fileName);
+                // Copy File
+                File.Copy(file, Path.Combine(soundsDestination, fileName), true);
+            }
+            Console.WriteLine("Sounds Directory Copied!");
         }
-        
-        foreach (var file in Directory.GetFiles(soundsSource))
-        {
-            // Get Filename
-            var fileName = Path.GetFileName(file);
-            Console.WriteLine("Copying " + fileName);
-            // Copy File
-            File.Copy(file, Path.Combine(soundsDestination, fileName), true);
-        }
-        Console.WriteLine("Sounds Directory Copied!");
         
         //Copy and then unpack the Maps directory from the CD to the destination
         Console.WriteLine("Copying Maps Directory...");
