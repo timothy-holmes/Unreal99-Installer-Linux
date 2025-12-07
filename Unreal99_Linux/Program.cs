@@ -70,25 +70,28 @@ class Program
         //Copy the Music and Sounds directories from the CD to the destination
         Console.WriteLine("Copying Music Directory...");
         Console.Title = "Unreal99 Linux Installer - Copying Music Directory";
-        var musicSource = Path.Combine(objCdPath, "Music");
+        var musicSource = Path.Combine(objCdPath, "Music");        
         var musicDestination = Path.Combine(objDestination, "Music");
-        
-        //Ensure destination directories exist
-        if (!Directory.Exists(musicDestination))
+
+        if (Directory.Exists(musicSource))
         {
-            Directory.CreateDirectory(musicDestination);
+            //Ensure destination directories exist
+            if (!Directory.Exists(musicDestination))
+            {
+                Directory.CreateDirectory(musicDestination);
+            }
+            
+            foreach (var file in Directory.GetFiles(musicSource))
+            {
+                // Get Filename
+                var fileName = Path.GetFileName(file);
+                Console.WriteLine("Copying " + fileName);
+                // Copy File
+                File.Copy(file, Path.Combine(musicDestination, fileName), true);
+            }
+            Console.WriteLine("Music Directory Copied!");
+            Console.WriteLine("Copying Sounds Directory...");
         }
-        
-        foreach (var file in Directory.GetFiles(musicSource))
-        {
-            // Get Filename
-            var fileName = Path.GetFileName(file);
-            Console.WriteLine("Copying " + fileName);
-            // Copy File
-            File.Copy(file, Path.Combine(musicDestination, fileName), true);
-        }
-        Console.WriteLine("Music Directory Copied!");
-        Console.WriteLine("Copying Sounds Directory...");
         Console.Title = "Unreal99 Linux Installer - Copying Sounds Directory";
         //Ensure destination directories exist
         var soundsSource = Path.Combine(objCdPath, "Sounds");
